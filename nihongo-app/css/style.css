@@ -74,23 +74,15 @@ body {
     background: var(--bg-color);
 }
 
-/* Sidebar a la derecha (Ahora Menú a Pantalla Completa Desplegable hacia abajo) */
+/* Sidebar a la derecha */
 .sidebar-right {
-    position: fixed;
-    top: -100vh;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 320px;
     background: white;
+    border-left: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
-    z-index: 200;
-    transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    overflow: hidden; /* Remove double scrolling */
-}
-
-.sidebar-right.active {
-    top: 0;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.03);
+    z-index: 5;
 }
 
 .sidebar-header {
@@ -112,7 +104,7 @@ body {
 }
 
 .mobile-close-btn {
-    display: block; /* Show always */
+    display: none;
     background: transparent;
     border: none;
     font-size: 1.5rem;
@@ -447,7 +439,7 @@ details[open] > .book-summary {
 
 /* Hamburger Menu Button */
 .mobile-menu-btn {
-    display: block; /* Always visible */
+    display: none;
     position: absolute;
     top: 20px;
     right: 20px;
@@ -487,6 +479,30 @@ details[open] > .book-summary {
 }
 
 @media (max-width: 768px) {
+    /* Show Hamburger Menu & Close Btn */
+    .mobile-menu-btn, .mobile-close-btn {
+        display: block;
+    }
+
+    /* Sidebar transforms into a full screen overlay menu sliding from top */
+    .sidebar-right {
+        position: fixed;
+        top: -100vh;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        max-width: 100vw;
+        z-index: 200;
+        transition: top 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        overflow: hidden;
+        border-left: none;
+        box-shadow: none;
+    }
+    
+    .sidebar-right.active {
+        top: 0;
+    }
+
 
     /* Header Adjustments */
     .top-header {

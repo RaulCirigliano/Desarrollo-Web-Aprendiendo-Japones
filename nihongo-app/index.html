@@ -591,9 +591,16 @@
             
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    sidebarRight.classList.remove('active');
-                    sidebarOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
+                    // Set active class visually
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    // Only close menu on mobile
+                    if (window.innerWidth <= 768) {
+                        sidebarRight.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
                 });
             });
         }
