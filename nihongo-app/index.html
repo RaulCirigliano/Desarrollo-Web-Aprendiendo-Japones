@@ -37,10 +37,13 @@
         <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <!-- Sidebar Derecha -->
         <aside class="sidebar-right">
-            <h2>Índice de Lecciones</h2>
+            <div class="sidebar-header">
+                <h2>Índice de Lecciones</h2>
+                <button class="mobile-close-btn" id="mobileCloseBtn">✕</button>
+            </div>
             <nav class="lesson-nav">
-                <details class="book-section">
-                    <summary class="book-summary">Minna no Nihongo I</summary>
+                <details class="book-section theme-minna1">
+                    <summary class="book-summary"><span>Minna no Nihongo I</span> <span class="chevron">▼</span></summary>
                     <div class="book-lessons">
                         <a href="lessons/lesson-compendio-minna1.html" target="main_frame" class="nav-link">
                             <span class="nav-num">★</span> Compendio de lo que se estudiará en este nivel
@@ -128,8 +131,8 @@
                     </div>
                 </details>
 
-                <details class="book-section">
-                    <summary class="book-summary">Minna no Nihongo II</summary>
+                <details class="book-section theme-minna2">
+                    <summary class="book-summary"><span>Minna no Nihongo II</span> <span class="chevron">▼</span></summary>
                     <div class="book-lessons">
                         <a href="lessons/lesson-compendio-minna2.html" target="main_frame" class="nav-link">
                             <span class="nav-num">★</span> Compendio de lo que se estudiará en este nivel
@@ -212,8 +215,8 @@
                     </div>
                 </details>
 
-                <details class="book-section">
-                    <summary class="book-summary">Preparación JLPT N5</summary>
+                <details class="book-section theme-n5">
+                    <summary class="book-summary"><span>Preparación JLPT N5</span> <span class="chevron">▼</span></summary>
                     <div class="book-lessons">
                         <a href="lessons/jlpt-n5-compendio.html" target="main_frame" class="nav-link">
                             <span class="nav-num">★</span> Compendio de lo que se estudiará en esta preparación
@@ -296,8 +299,8 @@
                     </div>
                 </details>
 
-                <details class="book-section">
-                    <summary class="book-summary">Preparación JLPT N4</summary>
+                <details class="book-section theme-n4">
+                    <summary class="book-summary"><span>Preparación JLPT N4</span> <span class="chevron">▼</span></summary>
                     <div class="book-lessons">
                         <a href="lessons/jlpt-n4-compendio.html" target="main_frame" class="nav-link">
                             <span class="nav-num">★</span> Compendio de lo que se estudiará en esta preparación
@@ -389,8 +392,8 @@
                     </div>
                 </details>
 
-                <details class="book-section">
-                    <summary class="book-summary">Preparación JLPT N3</summary>
+                <details class="book-section theme-n3">
+                    <summary class="book-summary"><span>Preparación JLPT N3</span> <span class="chevron">▼</span></summary>
                     <div class="book-lessons">
                         <a href="lessons/jlpt-n3-compendio.html" target="main_frame" class="nav-link">
                             <span class="nav-num">★</span> Compendio de lo que se estudiará en esta preparación
@@ -564,6 +567,7 @@
     <script>
         // Mobile Sidebar Toggle
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
         const sidebarRight = document.querySelector('.sidebar-right');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -571,18 +575,26 @@
         function toggleSidebar() {
             sidebarRight.classList.toggle('active');
             sidebarOverlay.classList.toggle('active');
+            if (sidebarRight.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = '';
+            }
         }
 
         if (mobileMenuBtn && sidebarOverlay) {
             mobileMenuBtn.addEventListener('click', toggleSidebar);
+            if (mobileCloseBtn) {
+                mobileCloseBtn.addEventListener('click', toggleSidebar);
+            }
             sidebarOverlay.addEventListener('click', toggleSidebar);
             
-            // Close sidebar when a link is clicked on mobile
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     if (window.innerWidth <= 768) {
                         sidebarRight.classList.remove('active');
                         sidebarOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
                     }
                 });
             });
