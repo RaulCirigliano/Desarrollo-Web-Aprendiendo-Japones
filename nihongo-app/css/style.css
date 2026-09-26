@@ -38,7 +38,7 @@ body {
 }
 
 .top-header {
-    background: linear-gradient(rgba(26, 26, 46, 0.7), rgba(42, 42, 74, 0.7)), url('../img/fuji_sakura_header.jpg');
+    background: linear-gradient(rgba(26, 26, 46, 0.3), rgba(42, 42, 74, 0.3)), url('../img/fuji_sakura_header.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
