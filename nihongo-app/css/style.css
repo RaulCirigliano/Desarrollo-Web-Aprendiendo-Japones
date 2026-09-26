@@ -74,15 +74,24 @@ body {
     background: var(--bg-color);
 }
 
-/* Sidebar a la derecha */
+/* Sidebar a la derecha (Ahora Menú a Pantalla Completa) */
 .sidebar-right {
-    width: 320px;
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
     background: white;
-    border-left: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
-    box-shadow: -5px 0 15px rgba(0,0,0,0.03);
-    z-index: 5;
+    z-index: 200;
+    transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow-y: auto;
+}
+
+.sidebar-right.active {
+    right: 0;
 }
 
 .sidebar-header {
@@ -104,7 +113,7 @@ body {
 }
 
 .mobile-close-btn {
-    display: none;
+    display: block; /* Show always */
     background: transparent;
     border: none;
     font-size: 1.5rem;
@@ -439,7 +448,7 @@ details[open] > .book-summary {
 
 /* Hamburger Menu Button */
 .mobile-menu-btn {
-    display: none;
+    display: block; /* Always visible */
     position: absolute;
     top: 20px;
     right: 20px;
@@ -479,10 +488,6 @@ details[open] > .book-summary {
 }
 
 @media (max-width: 768px) {
-    /* Show Hamburger Menu */
-    .mobile-menu-btn {
-        display: block;
-    }
 
     /* Header Adjustments */
     .top-header {
@@ -498,28 +503,7 @@ details[open] > .book-summary {
         font-size: 0.9rem;
     }
 
-    /* Sidebar transforms into a full screen overlay menu */
-    .sidebar-right {
-        position: fixed;
-        top: 0;
-        right: -100vw; /* Hide completely off-screen */
-        height: 100vh;
-        width: 100vw; /* Occupy full screen */
-        max-width: 100vw;
-        z-index: 200; /* Above everything */
-        transition: right 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        box-shadow: none;
-        overflow-y: auto;
-    }
-    
-    .mobile-close-btn {
-        display: block; /* Show the close button */
-    }
-    
-    /* When active, slide in */
-    .sidebar-right.active {
-        right: 0;
-    }
+    /* Iframe padding for mobile */
     
     /* Iframe padding for mobile */
     .iframe-body {

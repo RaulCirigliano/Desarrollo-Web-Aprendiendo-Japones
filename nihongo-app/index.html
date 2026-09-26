@@ -591,11 +591,9 @@
             
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    if (window.innerWidth <= 768) {
-                        sidebarRight.classList.remove('active');
-                        sidebarOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
+                    sidebarRight.classList.remove('active');
+                    sidebarOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
                 });
             });
         }
