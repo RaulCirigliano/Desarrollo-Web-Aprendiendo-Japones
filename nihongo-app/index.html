@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Compendio de estudio para revisar y tener una guia basado en el Minna no Nihongo y materiales de estudio para el JLPT.">
+    <meta name="author" content="Raul Cirigliano">
+    <meta name="keywords" content="Japonés, Minna no Nihongo, JLPT, N5, N4, N3, N2, aprender, gramática, vocabulario">
+    <meta property="og:title" content="Aprendiendo Japonés - Raul Cirigliano">
+    <meta property="og:description" content="Compendio de estudio para revisar y tener una guia basado en el Minna no Nihongo y materiales de estudio para el JLPT.">
+    <meta property="og:type" content="website">
 </head>
 <body class="app-body">
     <header class="main-header top-header">
@@ -17,6 +25,7 @@
             <span class="jp-title">日本語の勉強</span>
             <h1>Aprendiendo Japonés</h1>
         </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">☰</button>
     </header>
 
     <div class="page-layout">
@@ -25,6 +34,7 @@
             <iframe name="main_frame" src="welcome.html" frameborder="0" class="content-iframe"></iframe>
         </main>
 
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
         <!-- Sidebar Derecha -->
         <aside class="sidebar-right">
             <h2>Índice de Lecciones</h2>
@@ -109,6 +119,9 @@
                 </a>
                 <a href="lessons/lesson-25.html" target="main_frame" class="nav-link">
                     <span class="nav-num">25</span> Condicional ら y Aunque ても
+                </a>
+                <a href="lessons/lesson-numeros-contadores.html" target="main_frame" class="nav-link">
+                    <span class="nav-num">★</span> Especial: Números y Contadores
                 </a>
 
 
@@ -547,5 +560,33 @@
             </nav>
         </aside>
     </div>
+    
+    <script>
+        // Mobile Sidebar Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const sidebarRight = document.querySelector('.sidebar-right');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        function toggleSidebar() {
+            sidebarRight.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+        }
+
+        if (mobileMenuBtn && sidebarOverlay) {
+            mobileMenuBtn.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            
+            // Close sidebar when a link is clicked on mobile
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        sidebarRight.classList.remove('active');
+                        sidebarOverlay.classList.remove('active');
+                    }
+                });
+            });
+        }
+    </script>
 </body>
 </html>
