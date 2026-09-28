@@ -227,12 +227,29 @@
     <script>
         function playAudio(text) {
             if ('speechSynthesis' in window) {
-                // Cancel previous speech to avoid overlapping
                 window.speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'ja-JP'; 
-                utterance.rate = 0.9;     
-                window.speechSynthesis.speak(utterance);
+                utterance.lang = 'ja-JP';
+                utterance.rate = 0.9;
+                
+                const setVoiceAndSpeak = () => {
+                    const voices = window.speechSynthesis.getVoices();
+                    // Priorizar voces premium de Edge o Chrome
+                    let bestVoice = voices.find(v => v.lang.includes('ja') && (v.name.includes('Online') || v.name.includes('Natural') || v.name.includes('Google')));
+                    if (!bestVoice) {
+                        bestVoice = voices.find(v => v.lang.includes('ja'));
+                    }
+                    if (bestVoice) {
+                        utterance.voice = bestVoice;
+                    }
+                    window.speechSynthesis.speak(utterance);
+                };
+
+                if (window.speechSynthesis.getVoices().length === 0) {
+                    window.speechSynthesis.onvoiceschanged = setVoiceAndSpeak;
+                } else {
+                    setVoiceAndSpeak();
+                }
             } else {
                 alert("Tu navegador no soporta la reproducción de audio sintético.");
             }
